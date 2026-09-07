@@ -1,56 +1,56 @@
-# CI Workflow -> Pipeline
-name: Node.js CI
+# # CI Workflow -> Pipeline
+# name: Node.js CI
 
-# events on which you want your workflow to be triggered
-on:
-  push:
-    branches: [ "main" ]
-  pull_request:
-    branches: [ "main" ]
+# # events on which you want your workflow to be triggered
+# on:
+#   push:
+#     branches: [ "main" ]
+#   pull_request:
+#     branches: [ "main" ]
 
-jobs:
-# first job - build
-  build:
+# jobs:
+# # first job - build
+#   build:
 
-# server our workflow runs on
-    runs-on: ubuntu-latest
+# # server our workflow runs on
+#     runs-on: ubuntu-latest
 
-    strategy:
-      matrix:
-        node-version: [18.x, 20.x, 22.x]
-        # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
+#     strategy:
+#       matrix:
+#         node-version: [18.x, 20.x, 22.x]
+#         # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
 
-    steps:
-    # checkout into our workflow repo/branch
-    - uses: actions/checkout@v4
-    - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v4
-      with:
-        node-version: ${{ matrix.node-version }}
-        cache: 'npm'
-    - name: Build
-      run: echo "Building App"
+#     steps:
+#     # checkout into our workflow repo/branch
+#     - uses: actions/checkout@v4
+#     - name: Use Node.js ${{ matrix.node-version }}
+#       uses: actions/setup-node@v4
+#       with:
+#         node-version: ${{ matrix.node-version }}
+#         cache: 'npm'
+#     - name: Build
+#       run: echo "Building App"
 
-# second job - test
-  test:
+# # second job - test
+#   test:
 
-# server our workflow runs on
-    runs-on: ubuntu-latest
+# # server our workflow runs on
+#     runs-on: ubuntu-latest
 
-    strategy:
-      matrix:
-        node-version: [18.x, 20.x, 22.x]
-        # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
+#     strategy:
+#       matrix:
+#         node-version: [18.x, 20.x, 22.x]
+#         # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
 
-    steps:
-    # checkout into our workflow repo/branch
-    - uses: actions/checkout@v4
-    - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v4
-      with:
-        node-version: ${{ matrix.node-version }}
-        cache: 'npm'
-    - name: Run Tests
-      run: echo "Running Tests"
-      run: echo "Tests Executed!"
+#     steps:
+#     # checkout into our workflow repo/branch
+#     - uses: actions/checkout@v4
+#     - name: Use Node.js ${{ matrix.node-version }}
+#       uses: actions/setup-node@v4
+#       with:
+#         node-version: ${{ matrix.node-version }}
+#         cache: 'npm'
+#     - name: Run Tests
+#       run: echo "Running Tests"
+#       run: echo "Tests Executed!"
 

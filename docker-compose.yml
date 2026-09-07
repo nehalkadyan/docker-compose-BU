@@ -3,14 +3,29 @@ services:
   mongo:
     container_name: mongo
     image: mongo:latest
+
+    # storage to persist data in my hard disk
+    volumes:
+      - db-data:/data/db
     ports:
       - "27017:27017"
 
   bu-fsd-node:
     container_name: bu-fsd-node
     build: .
+
+    # the app will start only after mongo starts
+    depends_on:
+      - mongo
+
     ports:
-      - "4000:4000"
+      - "${PORT}:${PORT}"
+
+    # environment variables
     environment:
-      - PORT=4000
-      - MONGO_URL=mongodb://mongo:27017
+      - PORT=${PORT}
+      - MONGO_URL=${MONGO_URL}
+
+# storage to persist data in my hard disk
+volumes:
+  db-data:
